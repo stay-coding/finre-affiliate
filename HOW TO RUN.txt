@@ -1,0 +1,12 @@
+- Open in visual studio code
+
+SETUP (Cuman sekali proses):
+- Open terminal in VS Code, and run:
+	- php artisan migrate
+	- php artisan db:seed
+	- php artisan storage:link
+
+RUNNING
+- Open terminal in VS Code, and run
+	- php artisan serve
+	- npm run dev
