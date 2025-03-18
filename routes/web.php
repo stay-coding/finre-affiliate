@@ -41,6 +41,7 @@ Route::prefix('dashboard')->group(function () {
     Route::group(['middleware' => ['role:admin']], function () {
         Route::get('admin', [PagesController::class, 'dashboard_admin']);
         Route::get('pembayaran', [PagesController::class, 'pembayaran']);
+        Route::get('afiliator-list', [PagesController::class, 'afiliator']);
         Route::get('detail-pembayaran/{id}', [PagesController::class, 'detail_pembayaran']);
         Route::get('buat-materi', [PagesController::class, 'buat_materi']);
         Route::resource('payment', PaymentController::class);

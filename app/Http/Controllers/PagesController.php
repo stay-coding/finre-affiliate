@@ -210,6 +210,39 @@ class PagesController extends Controller
         return view('pages.admin.pembayaran.index', compact('afiliators'));
     }
 
+    public function afiliator(Request $request)
+    {
+        SEOTools::setTitle('Affiliator');
+        SEOTools::setDescription('This is my affiliator list');
+        SEOTools::opengraph()->setUrl(url('/dashboard/affiliator-list'));
+        SEOTools::opengraph()->addProperty('type', 'dashboard');
+        SEOTools::jsonLd()->addImage(asset('assets/logo.png'));
+
+        if ($request->input('search')) {
+            session()->put('search', $request->input('search'));
+
+            $afiliators = User::query()
+                ->role('afiliator')
+                ->with('user_information')
+                ->where('name', 'like', '%' . $request->search . '%')
+                ->orderBy('created_at', 'desc')
+                ->paginate(10);
+        } else {
+            session()->forget('search');
+
+            $afiliators = User::query()
+                ->role('afiliator')
+                ->with('user_information')
+                ->where('name', 'like', '%' . $request->search . '%')
+                ->orderBy('created_at', 'desc')
+                ->paginate(10);
+        }
+
+        // dd($afiliators->toArray());
+
+        return view('pages.admin.afiliator.index', compact('afiliators'));
+    }
+
     public function detail_pembayaran($id)
     {
         $user = User::with('user_information', 'total_comission')->find($id);
