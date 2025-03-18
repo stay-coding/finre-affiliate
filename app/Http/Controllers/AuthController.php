@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\RegisteredUserMail;
 use App\Models\TotalComission;
 use App\Models\User;
 use Illuminate\Support\Str;
@@ -9,6 +10,7 @@ use Illuminate\Http\Request;
 use App\Models\UserInformation;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Mail;
 
 class AuthController extends Controller
 {
@@ -54,6 +56,16 @@ class AuthController extends Controller
         TotalComission::create([
             'user_id' => $user->id,
         ]);
+
+        $data = [
+            'name' => $request->name,
+            'email' => $request->email,
+            'password' => $request->password,
+        ];
+
+        // Mail::to($request->email)->send(new RegisteredUserMail($data));
+        Mail::to($request->email)->queue(new RegisteredUserMail($data));
+
 
         flash()->addSuccess('Registrasi berhasil');
 
