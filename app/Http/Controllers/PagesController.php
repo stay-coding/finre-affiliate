@@ -225,6 +225,7 @@ class PagesController extends Controller
                 ->role('afiliator')
                 ->with('user_information')
                 ->where('name', 'like', '%' . $request->search . '%')
+                ->orWhere('email', 'like', '%' . $request->search . '%')
                 ->orderBy('created_at', 'desc')
                 ->paginate(10);
         } else {
