@@ -214,7 +214,7 @@ class PagesController extends Controller
     {
         SEOTools::setTitle('Affiliator');
         SEOTools::setDescription('This is my affiliator list');
-        SEOTools::opengraph()->setUrl(url('/dashboard/affiliator-list'));
+        SEOTools::opengraph()->setUrl(url('/dashboard/afiliator-list'));
         SEOTools::opengraph()->addProperty('type', 'dashboard');
         SEOTools::jsonLd()->addImage(asset('assets/logo.png'));
 
@@ -237,8 +237,6 @@ class PagesController extends Controller
                 ->orderBy('created_at', 'desc')
                 ->paginate(10);
         }
-
-        // dd($afiliators->toArray());
 
         return view('pages.admin.afiliator.index', compact('afiliators'));
     }
