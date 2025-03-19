@@ -3,12 +3,12 @@
 @section('content')
     <x-title judul="Afiliator" />
     <main class="mt-10 space-y-5">
-        <form action="afiliator" class="max-w-xl" method="GET" autocomplete="off">
+        <form action="afiliator-list" class="max-w-xl" method="GET" autocomplete="off">
             <x-input-field type="search" id="search" :value="session('search') ?? ''" name="search" placeholder="Cari data"
                 label="Cari data" />
             @if (session('search'))
                 <div class="mt-2.5 flex justify-end">
-                    <x-hyper-link-red href="afiliator" label="Reset" id="reset" />
+                    <x-hyper-link-red href="afiliator-list" label="Reset" id="reset" />
                 </div>
             @endif
         </form>
